@@ -23,8 +23,8 @@ This project is a app mobile-based e-commerce platform designed to facilitate on
 
 | Column 1 | Column 2 | Column 3 | Column 4 |
 |----------|----------|----------|
-| <img src="takehome/shoppage.png" width="100" height="100"> | <img src="takehome/addtocart.png" width="100" height="100"> | <img src="takehome/create.png" width="100" height="100"> |
-| <img src="takehome/storage.png" width="100" height="100"> |
+| <img src="takehome/shoppage.png" width="300" height="300"> | <img src="takehome/addtocart.png" width="300" height="300"> | <img src="takehome/create.png" width="300" height="300"> |
+| <img src="takehome/storage.png" width="300" height="300"> |
 ## Installation
 
 To run this project locally, follow these steps:
