@@ -23,12 +23,12 @@ This project is a app mobile-based e-commerce platform designed to facilitate on
 
 | Shoppage | Cart |
 |----------|----------|
-| <img src="takehome/shoppage.png" width="500" height="500"> | <img src="takehome/addtocart.png" width="500" height="500"> |
+| <img src="takehome/shoppage.png" width="240" height="500"> | <img src="takehome/addtocart.png" width="240" height="500"> |
 
 
 | Create | Storage |
 |----------|----------|
-| <img src="takehome/create.png" width="500" height="500"> | <img src="takehome/storage.png" width="500" height="500"> |
+| <img src="takehome/create.png" width="240" height="500"> | <img src="takehome/storage.png" width="240" height="500"> |
 
 ## Installation
 
