@@ -12,8 +12,6 @@ class Cart with ChangeNotifier {
   void addItem(
       String productId, String title, String imgProduct, int? priceDiscounted ) {
     if (_items.containsKey(productId)) {
-      // Cập nhật số lượng nếu sản phẩm đã có trong giỏ
-      // _items[productId]!.quantity += 1; // Giả sử bạn có thuộc tính quantity
     } else {
       _items.putIfAbsent(
         productId,

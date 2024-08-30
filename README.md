@@ -18,6 +18,16 @@ The project is implemented with accompanying technologies:
 
 This project is a app mobile-based e-commerce platform designed to facilitate online buying and selling.
 
+## 📸 ScreenShots
+
+
+ShopPage | Cart | Create | Storage |
+| ------------- | ------------- |------------- |
+| ![Alt text](/takehome/shoppage.png "ShopPage Product") | ![Alt text](/takehome/addtocart.png "Add to Cart Product ")  | ![Alt text](/takehome/create.png "Create Product") | ![Alt text](/takehome/storage.png "Storage Product ") |
+
+
+
+
 ## Installation
 
 To run this project locally, follow these steps:
