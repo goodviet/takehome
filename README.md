@@ -21,12 +21,10 @@ This project is a app mobile-based e-commerce platform designed to facilitate on
 ## 📸 ScreenShots
 
 
-ShopPage | Cart | Create | Storage |
-| ------------- | ------------- |------------- |
-| ![Alt text](/takehome/shoppage.png "ShopPage Product") | ![Alt text](/takehome/addtocart.png "Add to Cart Product ")  | ![Alt text](/takehome/create.png "Create Product") | ![Alt text](/takehome/storage.png "Storage Product ") |
-
-
-
+| ShopPage | Cart| Create | Storage |
+|----------|----------|----------|
+| ![Image 1](takehome/shoppage.png) | ![Image 2](takehome/addtocart.png) | ![Image 3](takehome/create.png) |
+| ![Image 4](takehome/storage.png) |
 
 ## Installation
 
