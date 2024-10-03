@@ -1,6 +1,7 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const cloudinary = require('cloudinary').v2;
 
 const M_Product = require('../model/M_Product');
 const ObjectId = mongoose.Types.ObjectId;
@@ -12,7 +13,7 @@ const productController = module.exports = {
             const data = await M_Product.find({ _id: new mongoose.Types.ObjectId(id) }
             )
                 .select(['_id', 'title', 'description', 'imgProduct', 'discountPercentage', 'priceOriginal', 'priceDiscounted'])
-                .exec();
+                .exec(); ``
 
             res.send({
                 message: 'Success',
@@ -35,8 +36,9 @@ const productController = module.exports = {
                 imgProduct: 1,
                 discountPercentage: 1,
                 priceOriginal: 1,
-                priceDiscounted: 1
-            });
+                priceDiscounted: 1,
+                date_created: 1,
+            }).sort({date_created: -1});
             const countProductInDB = getList.length;
             res.status(200).json({
                 // countUser: countProductInDB,
@@ -49,39 +51,43 @@ const productController = module.exports = {
         }
     },
     createProduct: async (req, res) => {
-
-        const objectData = {};
+        const dataImage = req.file;
         try {
-            const {
+  
+            const { title, description, discountPercentage, priceOriginal, priceDiscounted } = req.body;
+
+            if (!dataImage) {
+                return res.status(400).json({
+                    code: 400,
+                    message: "Error - No image uploaded"
+                });
+            }
+            const objectData = {
                 title,
                 description,
-                imgProduct,
+                imgProduct: dataImage.path,
                 discountPercentage,
                 priceOriginal,
-                priceDiscounted } = req.body;
+                priceDiscounted
+            };
 
-            objectData.title = title;
-            objectData.description = description;
-            objectData.imgProduct = imgProduct;
-            objectData.discountPercentage = discountPercentage;
-            objectData.priceOriginal = priceOriginal;
-            objectData.priceDiscounted = priceDiscounted;
 
             const data = await M_Product.create(objectData);
 
             res.status(200).json({
                 code: 200,
                 message: "Successfully Create Product Data",
-                data: data
-            })
-
-
+                data
+            });
         } catch (error) {
+            if (dataImage) {
+                cloudinary.uploader.destroy(dataImage.filename)
+            }
             res.status(400).json({
                 code: 400,
-                message: "Error - Unauthorized", error,
-
-            })
+                message: "Error - Unauthorized",
+                error: error.message || error
+            });
         }
     },
 
@@ -150,6 +156,7 @@ const productController = module.exports = {
     // Update Product
     updateProduct: async (req, res) => {
         try {
+
             const {
                 title,
                 description,
@@ -158,28 +165,29 @@ const productController = module.exports = {
                 priceOriginal,
                 priceDiscounted } = req.body;
 
-            var _id = req.params.id;
-            if (ObjectId.isValid(_id) == false) {
-                res.send({
+            const id = req.params.id;
+
+            //check type id 
+            if (ObjectId.isValid(id) == false) {
+                res.status(403).json({
                     message: 'Success',
                     code: 403,
-                    error: 'ID false'
+                    error: 'Data does not exist'
                 })
                 return
             }
-            const checkIdinDB = await M_User.find(
-                { _id: new mongoose.Types.ObjectId(_id) }
-            ).exec();
 
-            if (checkIdinDB.length == 0) {
-                res.send({
+            //check id in MongoDB
+            const checkIDInMongo = await M_Product.find({ _id: new mongoose.Types.ObjectId(id) }).exec();
+            if (checkIDInMongo === null) {
+                res.status(403).json({
                     message: 'Success',
                     code: 403,
-                    error: 'ID false'
+                    error: 'Data does not exist'
                 })
                 return
+            }
 
-            };
 
             const objectDataUpdate = {};
 
@@ -192,7 +200,7 @@ const productController = module.exports = {
 
 
 
-            const updateUser = await M_User.findByIdAndUpdate(_id, objectDataUpdate, { new: true })
+            const updateUser = await M_Product.findByIdAndUpdate(id, objectDataUpdate, { new: true })
             res.status(200).json({
                 code: 200,
                 message: "Product Update Successfully",
